@@ -72,12 +72,20 @@ def mouseClick(x, y, board_size, cell_size):
     return row, col
 
 '''
+Function initializeBoard
+Written by:             Fatema Yasmin
+Description:            initialize the game board as a 2d list
+'''
+def initializeBoard(board_size):
+    return [[' ' for _ in range(board_size)] for _ in range(board_size)]
+
+'''
 Function main
 '''
 def main():
     board_size = 3 #how many cells each row/col gets
     cell_size = 100 #can change this value to make the board and screen bigger or smaller
-
+    board = initializeBoard(board_size) # initialize the game board
     drawBoard(board_size, cell_size) #calls function to draw game board
 
 main()
