@@ -68,7 +68,9 @@ def mouseClick(x, y, board_size, cell_size):
     row = int((y - grid_offset) // -cell_size)
     col = int((x + grid_offset) // cell_size)
 
-    return row, col
+    # Call the function to make a move and switch players
+    makeMove(row, col)
+    switchPlayers()
 
 def initializeBoard(board_size):
     '''
@@ -78,12 +80,37 @@ def initializeBoard(board_size):
     '''
     return [[' ' for _ in range(board_size)] for _ in range(board_size)]
 
+current_player = 'X'  # Initial player
+
+def makeMove(row, col):
+    '''
+    Function makeMove
+    Written by:             Fatema Yasmin
+    Description:            Mark the cell at given row and column for the current player.
+    '''
+    global current_player
+    board[row][col] = current_player
+
+def switchPlayers():
+    '''
+    Function switchPlayers
+    Written by:             Fatema Yasmin
+    Description:            Switch the current player between 'X' and 'O' after each turn.
+    '''
+    global current_player
+    # check current player
+    if current_player == 'X':
+        current_player = 'O'
+    else:
+        current_player = 'X'
+
 def main():
     '''
     Function main
     '''
     board_size = 3 #how many cells each row/col gets
     cell_size = 100 #can change this value to make the board and screen bigger or smaller
+    global board
     board = initializeBoard(board_size) # initialize the game board
     drawBoard(board_size, cell_size) #calls function to draw game board
 
