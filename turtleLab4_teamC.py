@@ -56,6 +56,40 @@ def drawBoard(board_size, cell_size):
     screen.onscreenclick(lambda x, y: mouseClick(x, y, board_size, cell_size)) #gets coords of mouse click
     screen.mainloop() #keeps the window open
 
+  	'''
+    Function Check for Win
+    Written by:             Samuel LaRocca
+    Description:            Checks if the game has finished and figures out who won or if it was a tie
+    '''
+
+    # Check rows
+    for row in board:
+        if all(cell == 'X' for cell in row):
+            return 'X'
+        elif all(cell == 'O' for cell in row):
+            return 'O'
+
+    # Check columns
+    for col in range(3):
+        if all(board[row][col] == 'X' for row in range(3)):
+            return 'X'
+        elif all(board[row][col] == 'O' for row in range(3)):
+            return 'O'
+
+    # Check diagonals
+    if all(board[i][i] == 'X' for i in range(3)) or all(board[i][2 - i] == 'X' for i in range(3)):
+        return 'X'
+    elif all(board[i][i] == 'O' for i in range(3)) or all(board[i][2 - i] == 'O' for i in range(3)):
+        return 'O'
+
+    # Check for tie
+    if all(all(cell != ' ' for cell in row) for row in board):
+        return 'Tie'
+
+    # No winner yet
+    return None
+
+
 def mouseClick(x, y, board_size, cell_size):
     '''
     Function mouseClick
@@ -87,9 +121,36 @@ def makeMove(row, col):
     Function makeMove
     Written by:             Fatema Yasmin
     Description:            Mark the cell at given row and column for the current player.
+     edited by:             Samuel LaRocca
+    Description:            Gives an output if a player wins or it there is a tie and offers the chance to start a new game
+
+
     '''
     global current_player
     board[row][col] = current_player
+
+      # Check for win or tie
+    winner = checkForWin(board)
+    if winner:
+        if winner == 'Tie':
+            print("It's a tie!")
+        else:
+            print(f"Player {winner} wins!")
+        
+        # Ask user if they want to play again
+        play_again = input("Do you want to play again? (yes/no): ")
+        if play_again.lower() == 'yes':
+            # Reset the board and start a new game
+            global board
+            board = initializeBoard(board_size)
+            current_player = 'X'
+            turtle.clear()  # Clear the previous game board
+            drawBoard(board_size, cell_size)
+        else:
+            turtle.done()  # End the game if the user doesn't want to play again
+
+    else:
+        switchPlayers()
 
 def switchPlayers():
     '''
