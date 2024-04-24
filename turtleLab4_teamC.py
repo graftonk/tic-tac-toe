@@ -57,6 +57,28 @@ def drawBoard(board_size, cell_size):
     screen.onscreenclick(lambda x, y: mouseClick(x, y, board_size, cell_size)) #gets coords of mouse click
     screen.mainloop() #keeps the window open
 
+"""
+"""
+Function: Draw the X and O pieces and reset the board. 
+Written by: Frederika Del Cuore
+Description: Draw the X and O when the user clicks on it and then reset the board
+"""
+
+# Prompt the user to select 'X' or 'O'
+symbol = turtle.textinput("Select Symbol", "Choose 'X' or 'O': ").upper()
+while symbol not in ['X', 'O']:
+symbol = turtle.textinput("Select Symbol", "Invalid input. Choose 'X' or 'O': ").upper()
+
+# Update the board and draw the symbol
+if board[row][col] == " ":
+board[row][col] = symbol
+drawSymbol(symbol, row, col, cell_size)
+else:
+print("That square is already taken")'''
+
+
+
+"""
   	'''
     Function Check for Win
     Written by:             Samuel LaRocca
