@@ -15,6 +15,7 @@ Checklist:         Main function
 '''
 
 import turtle
+import math
 
 def drawBoard(board_size, cell_size):
     '''
@@ -151,6 +152,40 @@ def makeMove(row, col):
 
     else:
         switchPlayers()
+
+def drawXorO(row, col, player):
+    '''
+    Function drawXorO
+    Description:            Draw X or O in the cell at given row and column for the current player.
+    '''
+    t = turtle.Turtle()
+    t.speed(0)
+    t.hideturtle()
+
+    cell_center_x = col * cell_size + cell_size / 2
+    cell_center_y = row * cell_size + cell_size / 2
+
+    if player == 'X':
+        # Draw X
+        t.penup()
+        t.goto(cell_center_x - cell_size / 3, cell_center_y - cell_size / 3)
+        t.pendown()
+        t.goto(cell_center_x + cell_size / 3, cell_center_y + cell_size / 3)
+        t.penup()
+        t.goto(cell_center_x + cell_size / 3, cell_center_y - cell_size / 3)
+        t.pendown()
+        t.goto(cell_center_x - cell_size / 3, cell_center_y + cell_size / 3)
+    elif player == 'O':
+        # Draw O
+        radius = cell_size / 3
+        t.penup()
+        t.goto(cell_center_x + radius, cell_center_y)
+        t.setheading(90)
+        t.pendown()
+        t.circle(radius)
+    
+    t.hideturtle()
+    t.done()
 
 def switchPlayers():
     '''
