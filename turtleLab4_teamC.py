@@ -59,7 +59,7 @@ def drawBoard(board_size, cell_size):
 
 """
 """
-Function: Draw the X and O pieces and reset the board. 
+Function: Draw the X and O pieces 
 Written by: Frederika Del Cuore
 Description: Draw the X and O when the user clicks on it and then reset the board
 """
@@ -68,13 +68,13 @@ Description: Draw the X and O when the user clicks on it and then reset the boar
 symbol = turtle.textinput("Select Symbol", "Choose 'X' or 'O': ").upper()
 while symbol not in ['X', 'O']:
 symbol = turtle.textinput("Select Symbol", "Invalid input. Choose 'X' or 'O': ").upper()
+x = col * size + size // 2
+    y = -row * size - size // 2
+    if current_player == 'X':
+        drawX(x, y, size)
+    else:
+        drawO(x, y, size // 2)
 
-# Update the board and draw the symbol
-if board[row][col] == " ":
-board[row][col] = symbol
-drawSymbol(symbol, row, col, cell_size)
-else:
-print("That square is already taken")'''
 
 
 
