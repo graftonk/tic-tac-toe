@@ -111,7 +111,7 @@ def makeMove(row, col):
     Function makeMove
     Written by:             Fatema Yasmin
     Description:            Mark the cell at given row and column for the current player.
-     edited by:             Samuel LaRocca
+    edited by:              Samuel LaRocca
     Description:            Gives an output if a player wins or it there is a tie and offers the chance to start a new game
     '''
     global current_player
@@ -126,6 +126,8 @@ def makeMove(row, col):
         else:
             print(f"Player {winner} wins!")
             turtle.bye()
+    else:
+        switchPlayers()
         
         '''
         # Ask user if they want to play again
@@ -158,7 +160,6 @@ def drawPiece(row, col, cell_size):
         turtle.pendown()
         turtle.write(current_player, align="center", font=("Arial", 36, "normal"))
         makeMove(row, col)
-        switchPlayers()
     else:
         print("That space is already taken.")
 
